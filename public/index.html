@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth-website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script> 
+    <script>
+        async function signup(){
+            const username=document.getElementById("username_signup").value
+            const password=document.getElementById("signup_pass").value
+           await axios.post("http://localhost:8080/signup",{
+                password : password,
+                username : username
+            })
+            alert("you are signed up  bitch");
+        }
+        async function signin(){
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        SignUp
+        <input id="username_signup",type="text",name="username",placeholder="Username">
+        <input id="signup_pass",type="password",name="password",placeholder="password">
+        <button onclick="signup()">Submit</button>
+    </div>
+    <div>
+        SignIn
+        <input id="username_signin", type="text",name="username",placeholder="Username">
+        <input id="password_signin",type="password",name="password",placeholder="password">
+        <button onclick="signin()">Submit</button>
+    </div>
+    <div>
+        UserInfo
+        <div id="user_information"></div>
+    </div>
+    <div>
+        <button onclick="logout()"></button>
+    </div>
+</body>
+</html>
