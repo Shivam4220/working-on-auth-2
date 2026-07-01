@@ -11,7 +11,7 @@ function logger(req,res,next){
 }
 
 app.get("/",function(req,res){
-    res.send(__dirname + "/public/index.html")
+    res.sendFile(__dirname + "/public/index.html")
 })
 
 app.post("/signup",logger,function(req,res){
@@ -64,7 +64,8 @@ function auth(req, res, next) {
   const decodedinfo = jwt.verify(token, JWT_SECRET);
 
   if (decodedinfo.username) {
-    req.username=decodedinfo.username   //we are sending the username of currenct user to next function
+    req.username=decodedinfo.username 
+    req.password = decodedinfo.password;  //we are sending the username and password of currenct user to next function
    next()
   } else {
     res.json({

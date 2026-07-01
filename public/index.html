@@ -10,27 +10,44 @@
             const username=document.getElementById("username_signup").value
             const password=document.getElementById("signup_pass").value
            await axios.post("http://localhost:8080/signup",{
-                password : password,
-                username : username
+                
+                username : username,
+                password : password
             })
             alert("you are signed up  bitch");
         }
         async function signin(){
-
+            const username=document.getElementById("username_signin").value
+            const password=document.getElementById("password_signin").value
+            const response=await axios.post("http://localhost:8080/signin",{
+                password : password,
+                username : username
+            })
+            localStorage.setItem("token",response.data.token);
+            alert("you are signed in  bitch");
         }
+        async function getuserInfo(){
+             const response=await axios.get("http://localhost:8080/me",{
+                headers: {
+                    token : localStorage.getItem("token")
+                }
+             });
+             document.getElementById("user_information").innerHTML="username : " + response.data.username +" Password : "+response.data.password
+        }
+        getuserInfo();
     </script>
 </head>
 <body>
     <div>
         SignUp
-        <input id="username_signup",type="text",name="username",placeholder="Username">
-        <input id="signup_pass",type="password",name="password",placeholder="password">
+        <input id="username_signup" type="text" name="username" placeholder="Username">
+        <input id="signup_pass" type="password" name="password" placeholder="password">
         <button onclick="signup()">Submit</button>
     </div>
     <div>
         SignIn
-        <input id="username_signin", type="text",name="username",placeholder="Username">
-        <input id="password_signin",type="password",name="password",placeholder="password">
+        <input id="username_signin"  type="text" name="username" placeholder="Username">
+        <input id="password_signin" type="password" name="password" placeholder="password">
         <button onclick="signin()">Submit</button>
     </div>
     <div>
@@ -38,7 +55,7 @@
         <div id="user_information"></div>
     </div>
     <div>
-        <button onclick="logout()"></button>
+        <button onclick="logout()">Logout</button>
     </div>
 </body>
 </html>
