@@ -35,26 +35,34 @@
              document.getElementById("user_information").innerHTML="username : " + response.data.username +" Password : "+response.data.password
         }
         getuserInfo();
+
+        function logout(){
+            localStorage.removeItem("token")
+        }
+        window.onload = function () {
+     document.getElementById("user_information").style.display = "none";
+     document.getElementById("log_out").style.display = "none";
+}
     </script>
 </head>
 <body>
-    <div>
+    <div id="sign_up">
         SignUp
         <input id="username_signup" type="text" name="username" placeholder="Username">
         <input id="signup_pass" type="password" name="password" placeholder="password">
         <button onclick="signup()">Submit</button>
     </div>
-    <div>
+    <div id="sign_in">
         SignIn
         <input id="username_signin"  type="text" name="username" placeholder="Username">
         <input id="password_signin" type="password" name="password" placeholder="password">
         <button onclick="signin()">Submit</button>
     </div>
-    <div>
+    <div id="user_information">
         UserInfo
-        <div id="user_information"></div>
     </div>
-    <div>
+    <div id="log_out">
+        
         <button onclick="logout()">Logout</button>
     </div>
 </body>
